@@ -1,0 +1,34 @@
+- name: Ensure required packages are installed
+  become: true
+  package:
+    name:
+      - ca-certificates
+    state: present
+
+- name: Check if Pi-hole is already installed
+  stat:
+    path: /usr/local/bin/pihole
+  register: pihole_bin
+
+- name: Download Pi-hole installer script
+  become: true
+  get_url:
+    url: https://install.pi-hole.net
+    dest: /tmp/pihole_install.sh
+    mode: "0755"
+  when: not pihole_bin.stat.exists
+
+- name: Run Pi-hole installer unattended
+  become: true
+  shell: /tmp/pihole_install.sh --unattended
+  args:
+    creates: /usr/local/bin/pihole
+  when: not pihole_bin.stat.exists
+  notify: Restart Pi-hole
+
+- name: Remove Pi-hole installer script
+  become: true
+  file:
+    path: /tmp/pihole_install.sh
+    state: absent
+  when: not pihole_bin.stat.exists

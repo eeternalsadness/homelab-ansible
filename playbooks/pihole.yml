@@ -1,0 +1,7 @@
+---
+- name: Deploy and manage Pi-hole
+  hosts: pihole
+  gather_facts: true
+  become: true
+  roles:
+    - role: pihole

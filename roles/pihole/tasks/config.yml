@@ -1,0 +1,18 @@
+- name: Ensure Pi-hole config directory exists
+  become: true
+  file:
+    path: "{{ pihole_config_path | dirname }}"
+    state: directory
+    owner: pihole
+    group: pihole
+    mode: "0755"
+
+- name: Deploy pihole.toml
+  become: true
+  copy:
+    src: pihole.toml
+    dest: "{{ pihole_config_path }}"
+    owner: pihole
+    group: pihole
+    mode: "0644"
+  notify: Restart Pi-hole

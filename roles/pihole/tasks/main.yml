@@ -1,0 +1,11 @@
+- name: Install Pi-hole
+  import_tasks: install.yml
+  tags:
+    - install
+    - pihole
+
+- name: Configure Pi-hole
+  import_tasks: config.yml
+  tags:
+    - config
+    - pihole
