@@ -129,7 +129,8 @@
   hosts = [
     "192.168.0.42 rpi-1.home.lan",
     "192.168.0.50 proxmox-1.home.lan",
-    "192.168.0.60 proxmox-2.home.lan"
+    "192.168.0.60 proxmox-2.home.lan",
+    "192.168.0.90 postgres-1.home.lan"
   ] ### CHANGED, default = []
 
   # If set, queries for plain names, without dots or domain parts, are never forwarded to
