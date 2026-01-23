@@ -1,2 +1,3 @@
+---
 pihole_config_path: /etc/pihole/pihole.toml
 pihole_service_name: pihole-FTL
